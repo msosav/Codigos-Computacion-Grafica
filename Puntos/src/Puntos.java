@@ -24,16 +24,16 @@ public class Puntos extends JPanel {
     public void drawFigure(Graphics g, String fileName) {
         Map<Integer, String> points = new HashMap<Integer, String>();
         Map<Integer, String> lines = new HashMap<Integer, String>();
-        ReadTextFile casita = new ReadTextFile(points, lines).readFile(fileName);
+        ReadTextFile figura = new ReadTextFile(points, lines).readFile(fileName);
         g.setColor(Color.black);
-        casita.lines.forEach((k, v) -> {
+        figura.lines.forEach((k, v) -> {
             String[] line = v.split(",");
 
             int index1 = Integer.parseInt(line[0]);
             int index2 = Integer.parseInt(line[1]);
 
-            String[] point1 = casita.points.get(index1).split(",");
-            String[] point2 = casita.points.get(index2).split(",");
+            String[] point1 = figura.points.get(index1).split(",");
+            String[] point2 = figura.points.get(index2).split(",");
 
             int x1 = Integer.parseInt(point1[0]);
             int y1 = Integer.parseInt(point1[1]);
