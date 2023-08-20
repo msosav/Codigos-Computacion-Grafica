@@ -4,38 +4,38 @@ import java.util.Map;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import Math.Point2;
+import Math.Edge;
 
 public class ReadTextFile {
-    public Map<Integer, String> points = new HashMap<Integer, String>();
-    public Map<Integer, String> lines = new HashMap<Integer, String>();
+    public Map<Integer, Point2> points = new HashMap<Integer, Point2>();
+    public ArrayList<Edge> edges = new ArrayList<Edge>();
 
-    public ReadTextFile(Map<Integer, String> points, Map<Integer, String> lines) {
+    public ReadTextFile(Map<Integer, Point2> points, ArrayList<Edge> lines, String fileName) {
         this.points = points;
-        this.lines = lines;
+        this.edges = lines;
+        readFile(fileName);
     }
 
-    public ReadTextFile readFile(String fileName) {
+    public void readFile(String fileName) {
         try {
             Scanner scanner = new Scanner(new File(fileName));
             int numPoints = scanner.nextInt();
             for (int i = 0; i <= numPoints - 1; i++) {
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
-                String point = x + "," + y;
-                points.put(i, point);
+                points.put(i, new Point2(x, y));
             }
             int numLines = scanner.nextInt();
             for (int i = 0; i <= numLines - 1; i++) {
-                int indice1 = scanner.nextInt();
-                int indice2 = scanner.nextInt();
-                String line = indice1 + "," + indice2;
-                lines.put(i, line);
+                int punto1 = scanner.nextInt();
+                int punto2 = scanner.nextInt();
+                edges.add(new Edge(points.get(punto1), points.get(punto2)));
             }
             scanner.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return new ReadTextFile(points, lines);
     }
 }

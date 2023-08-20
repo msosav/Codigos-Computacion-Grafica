@@ -1,10 +1,15 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JPanel;
+
+import Math.Edge;
+import Math.Point2;
+
 import javax.swing.JFrame;
 
 public class Puntos extends JPanel {
@@ -22,26 +27,16 @@ public class Puntos extends JPanel {
     }
 
     public void drawFigure(Graphics g, String fileName) {
-        Map<Integer, String> points = new HashMap<Integer, String>();
-        Map<Integer, String> lines = new HashMap<Integer, String>();
-        ReadTextFile figura = new ReadTextFile(points, lines).readFile(fileName);
+        Map<Integer, Point2> points = new HashMap<Integer, Point2>();
+        ArrayList<Edge> edges = new ArrayList<Edge>();
+
+        ReadTextFile figura = new ReadTextFile(points, edges, fileName);
+
         g.setColor(Color.black);
-        figura.lines.forEach((k, v) -> {
-            String[] line = v.split(",");
-
-            int index1 = Integer.parseInt(line[0]);
-            int index2 = Integer.parseInt(line[1]);
-
-            String[] point1 = figura.points.get(index1).split(",");
-            String[] point2 = figura.points.get(index2).split(",");
-
-            int x1 = Integer.parseInt(point1[0]);
-            int y1 = Integer.parseInt(point1[1]);
-            int x2 = Integer.parseInt(point2[0]);
-            int y2 = Integer.parseInt(point2[1]);
-
-            myDrawLine(g, x1, y1, x2, y2);
-        });
+        
+        for (Edge edge : figura.edges) {
+            myDrawLine(g, edge.point1.x, edge.point1.y, edge.point2.x, edge.point2.y);
+        }
     }
 
     public void drawAxis(Graphics g) {
