@@ -26,7 +26,7 @@ public class Matrix3x3 {
         this.a33 = a33;
     }
 
-    public static Point3 times(Matrix3x3 Matriz, Point3 Punto) {
+    public Point3 times(Matrix3x3 Matriz, Point3 Punto) {
         return new Point3(
                 Matriz.a11 * Punto.x + Matriz.a12 * Punto.y + Matriz.a13 * Punto.z,
                 Matriz.a21 * Punto.x + Matriz.a22 * Punto.y + Matriz.a23 * Punto.z,

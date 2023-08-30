@@ -5,15 +5,18 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import Math.Point2;
+import Math.Point3;
 import Math.Edge;
 
 public class ReadTextFile {
     public Map<Integer, Point2> points = new HashMap<Integer, Point2>();
     public ArrayList<Edge> edges = new ArrayList<Edge>();
+    public Point2 origen;
 
-    public ReadTextFile(Map<Integer, Point2> points, ArrayList<Edge> lines, String fileName) {
+    public ReadTextFile(Map<Integer, Point2> points, ArrayList<Edge> lines, String fileName, Punto2 origen) {
         this.points = points;
         this.edges = lines;
+        this.origen = origen;
         readFile(fileName);
     }
 
