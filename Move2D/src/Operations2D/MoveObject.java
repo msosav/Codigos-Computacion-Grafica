@@ -6,6 +6,7 @@ import java.util.Map;
 import Math.Edge;
 import Math.Matrix3x3;
 import Math.Point2;
+import Utils.ReadTextFile;
 
 public class MoveObject {
     public Map<Integer, Point2> points;
@@ -17,7 +18,7 @@ public class MoveObject {
 
     public static boolean CENTER_TRANSFORMS;
 
-    public MoveObject(Map<Integer, Point2> points, ArrayList<Edge> edges, Point2 origen) {
+    public MoveObject(Map<Integer, Point2> points, ArrayList<Edge> edges) {
         this.points = points;
         this.edges = edges;
     }
@@ -45,8 +46,12 @@ public class MoveObject {
     public ArrayList<Edge> scaleUp(double sx, double sy) {
         this.scaledMatrix = new Scaling3x3(sx, sy);
         if (CENTER_TRANSFORMS) {
+            Point2 center = findCenter();
+            pointsToCenter(center);
             Matrix3x3 aux = transform(0, 0, sx, sy, 0);
-            return Matrix3x3.times(edges, aux);
+            edges = Matrix3x3.times(edges, aux);
+            pointsToNormal(center);
+            return edges;
         } else {
             return Matrix3x3.times(edges, scaledMatrix.matrix);
         }
@@ -54,12 +59,56 @@ public class MoveObject {
 
     public ArrayList<Edge> scaleDown(double sx, double sy) {
         this.scaledMatrix = new Scaling3x3(1 / sx, 1 / sy);
-        return Matrix3x3.times(edges, scaledMatrix.matrix);
+        Matrix3x3 aux = transform(0, 0, 1 / sx, 1 / sy, 0);
+
+        if (CENTER_TRANSFORMS) {
+            Point2 center = findCenter();
+            pointsToCenter(center);
+            edges = Matrix3x3.times(edges, aux);
+            pointsToNormal(center);
+            return edges;
+        } else {
+            return Matrix3x3.times(edges, aux);
+        }
     }
 
     public ArrayList<Edge> rotate(double theta) {
         this.rotatedMatrix = new Rotation3x3(theta);
         return Matrix3x3.times(edges, rotatedMatrix.matrix);
+    }
+
+    public Point2 findCenter() {
+        double x = 0;
+        double y = 0;
+        for (Point2 point : points.values()) {
+            x += point.x;
+            y += point.y;
+        }
+        x /= points.size();
+        y /= points.size();
+        return new Point2(x, y);
+    }
+
+    public void pointsToCenter(Point2 center) {
+        for (Point2 point : points.values()) {
+            point.x -= center.x;
+            point.y -= center.y;
+        }
+    }
+
+    public void pointsToNormal(Point2 center) {
+        for (Point2 point : points.values()) {
+            point.x += center.x;
+            point.y += center.y;
+        }
+
+        for(Edge edge : edges) {
+            edge.point1.x += center.x;
+            edge.point1.y += center.y;
+            edge.point2.x += center.x;
+            edge.point2.y += center.y;
+        }
+        
     }
 
     public Matrix3x3 transform(double dx, double dy, double sx, double sy, double theta) {

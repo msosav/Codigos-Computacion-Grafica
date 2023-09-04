@@ -23,8 +23,7 @@ public class App extends JPanel {
         ReadTextFile figureFile = new ReadTextFile(fileName);
         Map<Integer, Point2> points = figureFile.points;
         ArrayList<Edge> edges = figureFile.edges;
-        Point2 origen = figureFile.origen;
-        figure = new MoveObject(points, edges, origen);
+        figure = new MoveObject(points, edges);
         this.addKeyListener(
                 new Keyboard(figure, this));
         this.setFocusable(true);
