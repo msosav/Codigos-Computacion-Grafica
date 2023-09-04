@@ -10,12 +10,13 @@ import Math.Edge;
 import Math.Matrix3x3;
 import Math.Point2;
 import Math.Point3;
+import Math.Vector3;
 
 import javax.swing.JFrame;
 
 public class Puntos extends JPanel {
-    public static final int WIDTH = 700;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 800;
 
     @Override
     public void paintComponent(Graphics g) {
@@ -29,32 +30,6 @@ public class Puntos extends JPanel {
         ReadTextFile casita = new ReadTextFile(pointsCasita, edgesCasita, "casita.txt");
 
         drawFigure(g, edgesCasita);
-        traslateFigure(g, edgesCasita, 100, 50);
-        // drawFigure(g, "gancho.txt");
-    }
-
-    public void traslateFigure(Graphics g, ArrayList<Edge> edges, int dx, int dy) {
-
-        Matrix3x3 matriz = new Matrix3x3(1, 0, dx,
-                                        0, 1, dy,
-                                        0, 0, 1);
-
-        g.setColor(Color.blue);
-
-        for (Edge edge : edges) {
-            Point3 punto1 = new Point3(edge.point1.x, edge.point1.y, 1);
-            Point3 punto2 = new Point3(edge.point2.x, edge.point2.y, 1);
-            punto1 = matriz.times(matriz, punto1);
-            punto2 = matriz.times(matriz, punto2);
-
-            edge.point1.x = punto1.x;
-            edge.point1.y = punto1.y;
-
-            edge.point2.x = punto2.x;
-            edge.point2.y = punto2.y;
-
-            myDrawLine(g, punto1.x, punto1.y, punto2.x, punto2.y);
-        }
     }
 
     public void drawFigure(Graphics g, ArrayList<Edge> edges) {

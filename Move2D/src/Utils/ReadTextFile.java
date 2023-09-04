@@ -1,3 +1,4 @@
+package Utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,17 +13,13 @@ public class ReadTextFile {
     public ArrayList<Edge> edges = new ArrayList<Edge>();
     public Point2 origen;
 
-    public ReadTextFile(Map<Integer, Point2> points, ArrayList<Edge> edges, String fileName) {
-        this.points = points;
-        this.edges = edges;
+    public ReadTextFile(String fileName) {
         readFile(fileName);
     }
 
     public void readFile(String fileName) {
         int mayorX = 0;
         int mayorY = 0;
-        int menorX = 0;
-        int menorY = 0;
 
         try {
             Scanner scanner = new Scanner(new File(fileName));
@@ -31,23 +28,11 @@ public class ReadTextFile {
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
                 points.put(i, new Point2(x, y));
-
-                if (x > mayorX) {
-                    mayorX = x;
-                }
-                if (y > mayorY) {
-                    mayorY = y;
-                }
-                if (x < menorX) {
-                    menorX = x;
-                }
-                if (y < menorY) {
-                    menorY = y;
-                }
-
+                mayorX += x;
+                mayorY += y;
             }
-            int ox = ((mayorX+menorX)/2);
-            int oy = ((mayorY+menorY)/2);
+            int ox = (mayorX)/numPoints;
+            int oy = (mayorY)/numPoints;
             origen = new Point2(ox, oy);
             int numLines = scanner.nextInt();
             for (int i = 0; i <= numLines - 1; i++) {
