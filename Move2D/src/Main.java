@@ -11,7 +11,7 @@ public class Main extends JPanel {
         JFrame frame = new JFrame("Puntos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(app);
-        Operations2D.MoveObject.CENTER_TRANSFORMS = true;
+        Operations2D.TranslScalRot3x3.CENTER_TRANFORMS = true;
         frame.setSize(App.getWIDTH(), App.getHEIGHT());
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

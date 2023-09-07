@@ -34,7 +34,7 @@ public class App extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         DrawFigure.drawAxis(g);
-        DrawFigure.drawFigure(g, figure.edges);
+        figure.drawFigure(g);
     }
 
     public static int getWIDTH() {

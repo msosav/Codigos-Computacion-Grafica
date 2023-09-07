@@ -35,7 +35,7 @@ public class Matrix3x3 {
         this.a33 = a33;
     }
 
-    public Point3 times(Matrix3x3 Matriz, Point3 Punto) {
+    public static Point3 times(Matrix3x3 Matriz, Point3 Punto) {
         return new Point3(
                 Matriz.a11 * Punto.x + Matriz.a12 * Punto.y + Matriz.a13 * Punto.z,
                 Matriz.a21 * Punto.x + Matriz.a22 * Punto.y + Matriz.a23 * Punto.z,
@@ -61,8 +61,8 @@ public class Matrix3x3 {
             Point3 point1 = new Point3(edge.point1.x, edge.point1.y, 1);
             Point3 point2 = new Point3(edge.point2.x, edge.point2.y, 1);
 
-            Point3 newPoint1 = translationMatrix.times(translationMatrix, point1);
-            Point3 newPoint2 = translationMatrix.times(translationMatrix, point2);
+            Point3 newPoint1 = Matrix3x3.times(translationMatrix, point1);
+            Point3 newPoint2 = Matrix3x3.times(translationMatrix, point2);
 
             newEdges.add(new Edge(new Point2(newPoint1.x, newPoint1.y), new Point2(newPoint2.x, newPoint2.y)));
         }

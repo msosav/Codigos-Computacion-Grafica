@@ -28,28 +28,28 @@ public class Keyboard implements KeyListener {
 
         switch (key) {
             case KeyEvent.VK_W:
-                figure.edges = figure.up(units);
+                figure.up(units);
                 break;
             case KeyEvent.VK_S:
-                figure.edges = figure.down(units);
+                figure.down(units);
                 break;
             case KeyEvent.VK_A:
-                figure.edges = figure.left(units);
+                figure.left(units);
                 break;
             case KeyEvent.VK_D:
-                figure.edges = figure.right(units);
+                figure.right(units);
                 break;
             case KeyEvent.VK_Q:
-                figure.edges = figure.scaleUp(1.1, 1.1);
+                figure.scaleUp(1.1, 1.1);
                 break;
             case KeyEvent.VK_E:
-                figure.edges = figure.scaleDown(1.1, 1.1);
+                figure.scaleDown(1.1, 1.1);
                 break;
             case KeyEvent.VK_R:
-                figure.edges = figure.rotate(1);
+                figure.rotate(1);
                 break;
             case KeyEvent.VK_T:
-                figure.edges = figure.rotate(-1);
+                figure.rotate(-1);
                 break;
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
