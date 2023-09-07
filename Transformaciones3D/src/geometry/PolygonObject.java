@@ -12,7 +12,7 @@ import java.io.File;
 import display.Main;
 
 public class PolygonObject {
-    ArrayList<Vector4> vertices;
+    public ArrayList<Vector4> vertices;
     public ArrayList<Vector4> transformedVertices; // vertices after transformation
     public ArrayList<Edge> edges;
     Main canvas;

@@ -65,7 +65,6 @@ public class Main extends JPanel
       int key = e.getKeyCode();
       if(key == KeyEvent.VK_D) {
         po.ot.dx += ObjectTransformation.DELTA_TRANSL;
-        po.ot.createTransformation();
         repaint();
       } else if(key == KeyEvent.VK_A) {
         po.ot.dx -= ObjectTransformation.DELTA_TRANSL;
