@@ -43,6 +43,7 @@ public class Main extends JPanel
 
     g.setColor(Color.BLACK);
     po.transformObject();
+    po.setCamera();
     po.projectObject();
     po.draw();
 
